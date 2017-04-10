@@ -1,5 +1,18 @@
+# == Schema Information
+#
+# Table name: ports
+#
+#  id         :integer          not null, primary key
+#  title      :string(255)
+#  lat        :float
+#  lng        :float
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'rails_helper'
 
 RSpec.describe Port, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should validate_presence_of(:lat) }
+  it { should validate_presence_of(:lng) }
 end

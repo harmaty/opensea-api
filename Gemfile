@@ -9,6 +9,8 @@ gem 'spring', :group => :development
 
 gem 'pg'
 
+gem 'geokit-rails'
+
 
 
 # To use ActiveModel has_secure_password

@@ -10,8 +10,9 @@
 #  updated_at :datetime
 #
 
-class Port < ActiveRecord::Base
-  acts_as_mappable
-
-  validates_presence_of :lat, :lng
+FactoryGirl.define do
+  factory :port do
+    lat 0
+    lng 0
+  end
 end

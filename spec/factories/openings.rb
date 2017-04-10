@@ -10,10 +10,10 @@
 #  updated_at   :datetime
 #
 
-require 'rails_helper'
-
-RSpec.describe Opening, type: :model do
-  it { should belong_to(:position) }
-  it { should belong_to(:port) }
-  it { should validate_presence_of(:opening_date) }
+FactoryGirl.define do
+  factory :opening do
+    position
+    port
+    opening_date { Date.today }
+  end
 end
