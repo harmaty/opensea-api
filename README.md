@@ -1,4 +1,4 @@
-== README
+### README
 
 Установка
 
@@ -18,4 +18,10 @@ rake db:setup
 rspec
 ```
 
+Запускаем сервер
+```bash
+rails s
+```
 
+
+API доступно по URL: http://localhost:3000/api/v1/oppositions/1
