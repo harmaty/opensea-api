@@ -25,8 +25,10 @@ class Position < ActiveRecord::Base
     oppositions = Position.opposite(self.position_type).capacity(self.hold_capacity).joins(:ports)
 
     opening = openings.first
-    # Для ближайшей даты открытия позиции ищем ближайщую противоположную позицию
-    oppositions.where('openings.opening_date' => opening.opening_date)
-        .merge(Port.by_distance(origin: [opening.port.lat, opening.port.lng])).first
+    # выбираем противоположные позиции с ближайшей датой открытия позиции
+    oppositions = oppositions.where('openings.opening_date' => opening.opening_date)
+    # сортируем по удалению от порта открытия позиции
+    oppositions = oppositions.merge(Port.by_distance(origin: [opening.port.lat, opening.port.lng]))
+    oppositions.first
   end
 end
