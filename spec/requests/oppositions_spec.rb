@@ -21,7 +21,7 @@ RSpec.describe 'Opposite Positions API', type: :request do
     end
 
     it 'returns json' do
-      expect(response.body).to eq([ship].to_json)
+      expect(response.body).to eq(ship.to_json)
     end
   end
 end

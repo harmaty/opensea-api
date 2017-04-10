@@ -17,13 +17,22 @@ RSpec.describe Position, type: :model do
   it { should have_many(:ports) }
 
   describe '#search_opppositions' do
+
+    context 'Position without opening dates' do
+      subject { cargo.search_oppositions }
+      let(:cargo) { create :cargo }
+      it 'returns nil' do
+        is_expected.to be_nil
+      end
+    end
+
     context 'Cargo' do
       subject { cargo.search_oppositions }
       let(:cargo) { create :cargo, :with_opening }
 
       context "Cargo and no ships" do
-        it 'returns empty array' do
-          is_expected.to be_empty
+        it 'returns nil' do
+          is_expected.to be_nil
         end
       end
 
@@ -36,7 +45,7 @@ RSpec.describe Position, type: :model do
         end
 
         it 'returns ship' do
-          is_expected.to eq([ship])
+          is_expected.to eq(ship)
         end
       end
 
@@ -48,8 +57,8 @@ RSpec.describe Position, type: :model do
           create :opening, position: ship, port: opening.port, opening_date: opening.opening_date
         end
 
-        it 'returns empty array' do
-          is_expected.to be_empty
+        it 'returns nil' do
+          is_expected.to be_nil
         end
       end
 
@@ -62,7 +71,7 @@ RSpec.describe Position, type: :model do
         end
 
         it 'returns ship' do
-          is_expected.to eq([ship])
+          is_expected.to eq(ship)
         end
       end
 
@@ -74,8 +83,8 @@ RSpec.describe Position, type: :model do
           create :opening, position: ship, port: opening.port, opening_date: opening.opening_date + 5.days
         end
 
-        it 'returns empty array' do
-          is_expected.to be_empty
+        it 'returns nil' do
+          is_expected.to be_nil
         end
       end
 
@@ -96,7 +105,7 @@ RSpec.describe Position, type: :model do
         end
 
         it 'returns ship in nearest port' do
-          is_expected.to eq([ship3])
+          is_expected.to eq(ship3)
         end
       end
     end
@@ -117,8 +126,8 @@ RSpec.describe Position, type: :model do
           end
         end
 
-        it 'returns three cargos' do
-          is_expected.to eq([cargo1, cargo2, cargo3])
+        it 'returns cargo with earliest opening date' do
+          is_expected.to eq(cargo1)
         end
       end
     end
