@@ -15,6 +15,8 @@ class Position < ActiveRecord::Base
   has_many :openings, -> { order(:opening_date) }, dependent: :destroy
   has_many :ports, :through => :openings
 
+  validates :position_type, inclusion: { in: %w(Ship Cargo) }
+
   scope :opposite, ->(position_type) { where.not(position_type: position_type) }
   scope :capacity, ->(hold_capacity) { where(hold_capacity: hold_capacity*0.9..hold_capacity*1.1) }
 

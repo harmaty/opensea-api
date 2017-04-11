@@ -15,6 +15,7 @@ require 'rails_helper'
 RSpec.describe Position, type: :model do
   it { should have_many(:openings) }
   it { should have_many(:ports) }
+  it { should validate_inclusion_of(:position_type).in_array(%w{Cargo Ship}) }
 
   describe '#search_opppositions' do
 
